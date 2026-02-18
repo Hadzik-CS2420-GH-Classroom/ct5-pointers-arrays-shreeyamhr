@@ -13,7 +13,7 @@ void pointersAndArrays() {
     int size = 5;
 
     // TODO: Declare a pointer called 'ptr' that points to the first element of 'numbers'
-    //
+	int* ptr = &numbers[0];  //simply int* ptr = numbers; also works because the array name decays to a pointer to its first element
     // ! DISCUSSION: Why int* ptr and not int *ptr?
     //   Both compile — the * can go next to the type or the variable name.
     //   We prefer int* ptr because it reads as "ptr is of type int-pointer."
@@ -31,7 +31,7 @@ void pointersAndArrays() {
     std::cout << "Array first element: " << numbers[0] << '\n';
     // TODO: Print the value that 'ptr' points to using the dereference operator (*)
     // Expected output: "Pointer points to: 10"
-    //
+	std::cout << "Pointer points to: " << *ptr << '\n';
     // ! DISCUSSION: Why *ptr and not ptr?
     //   ptr holds an address (e.g., 0x7ffd1234).
     //   *ptr "dereferences" the pointer — it follows the address and gives
@@ -40,6 +40,7 @@ void pointersAndArrays() {
 
     // --- 2. Taking the address of array elements ---
     std::cout << "\n--- 2. Address of Array Elements ---" << '\n';
+
 
     std::cout << "Address of numbers array: " << numbers << '\n';
     //
@@ -50,14 +51,16 @@ void pointersAndArrays() {
 
     // TODO: Print the address of numbers[0] using the address-of operator (&)
     // Expected output: "Address of numbers[0]: <some address>"
+	std::cout << "Address of numbers[0]: " << &numbers[0] << '\n';
 
     // TODO: Print the address of numbers[1] using the address-of operator (&)
     // Expected output: "Address of numbers[1]: <some address>"
-
+	std::cout << "Address of numbers[1]: " << &numbers[1] << '\n';
     // TODO: Print the difference in bytes between &numbers[1] and &numbers[0]
     //       Hint: cast the addresses to (char*) before subtracting to get bytes
     // Expected output: "Bytes between elements: 4"
-    //
+	std::cout << "Bytes between elements: " << (char*)&numbers[1] - (char*)&numbers[0] << '\n';
+
     // ! DISCUSSION: Why cast to (char*) before subtracting?
     //   Pointer arithmetic is scaled by the type size. If we subtract two
     //   int* pointers, we get the difference in "number of ints" (which is 1).
@@ -76,7 +79,8 @@ void pointersAndArrays() {
     int value = 42;
 
     // TODO: Declare a pointer called 'pValue' that points to 'value'
-    //
+	int* pValue = &value;
+
     // ! DISCUSSION: Why do we need & here but not with arrays?
     //   'value' is a plain int, not an array. It doesn't decay to a pointer.
     //   We must explicitly take its address with &value.
@@ -84,9 +88,10 @@ void pointersAndArrays() {
 
     // TODO: Print the value of 'value' by dereferencing 'pValue'
     // Expected output: "Dereferenced value: 42"
+	std::cout << "Dereferenced value: " << *pValue << '\n';
 
     // TODO: Change 'value' through the pointer by assigning 99 to *pValue
-    //
+	*pValue = 99;
     // ! DISCUSSION: How does *pValue = 99 change 'value'?
     //   pValue holds the address of 'value'. Writing to *pValue means
     //   "go to that address and store 99 there." Since that address IS
@@ -96,12 +101,12 @@ void pointersAndArrays() {
     std::cout << "After modification through pointer:" << '\n';
     // TODO: Print 'value' directly to show it changed
     // Expected output: "value is now: 99"
-
+	printf("value is now: %d\n", value);
     // --- 4. Pointer arithmetic ---
     // ? SEE DIAGRAM: images/array_in_memory.png — shows pointer arithmetic on the array
     std::cout << "\n--- 4. Pointer Arithmetic ---" << '\n';
 
-    int* start = numbers;
+	int* start = numbers;//decays to pointer to first element
     //
     // ! DISCUSSION: Why can we write int* start = numbers without &?
     //   The array name 'numbers' decays to a pointer to its first element.
@@ -111,21 +116,23 @@ void pointersAndArrays() {
 
     // TODO: Use pointer arithmetic (start + 1) to print the second element
     // Expected output: "start + 1 points to: 20"
-    //
+    
     // ! DISCUSSION: Why does start + 1 skip 4 bytes, not 1 byte?
     //   Pointer arithmetic is type-aware. start is an int*, so +1 advances
     //   by sizeof(int) = 4 bytes, landing exactly on the next int in the array.
-    //   The compiler handles the scaling — you think in "elements," not bytes.
+    std::cout << "start + 1 points to: " << *(start + 1) << '\n';
 
     // TODO: Use pointer arithmetic (start + 3) to print the fourth element
     // Expected output: "start + 3 points to: 40"
-
+	std::cout << "start + 3 points to: " << *(start + 3) << '\n';
     // TODO: Create a pointer 'end' that points to the last element using pointer arithmetic
     //
     // ! DISCUSSION: Why size - 1 and not just size?
     //   start + size points ONE PAST the last element (used as a sentinel).
     //   start + size - 1 points to the actual last element (index 4).
     //   Off-by-one errors with pointers are a common source of bugs!
+	int* end = start + size - 1;
+	std::cout << "start + size - 1 points to: " << *end << '\n';
 
     // TODO: Print all elements by incrementing a pointer in a for loop
     //       Hint: use a pointer that starts at 'numbers' and increments with ++
@@ -137,7 +144,10 @@ void pointersAndArrays() {
     //   Using < keeps us safely within the array bounds.
     //   This is the same pattern as iterators: begin() to end(), where
     //   end() is one past the last element.
-    //
+	std::cout << "Walking with pointer: ";
+    for (int* p = numbers; p < numbers + size; ++p) {
+        std::cout << *p << " ";
+	}
     // ! DISCUSSION: Does ++p skip the first element?
     //   No! In a for loop, the update step (++p) runs AFTER each iteration,
     //   not before the first one. The order is: init → check → body → update.
