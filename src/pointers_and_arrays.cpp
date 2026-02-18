@@ -113,6 +113,7 @@ void pointersAndArrays() {
     //   So this is equivalent to: int* start = &numbers[0];
 
     std::cout << "start points to: " << *start << '\n';
+	std::cout << "start + 0 points to: " << *(start + 0) << '\n';
 
     // TODO: Use pointer arithmetic (start + 1) to print the second element
     // Expected output: "start + 1 points to: 20"
