@@ -101,7 +101,8 @@ void pointersAndArrays() {
     std::cout << "After modification through pointer:" << '\n';
     // TODO: Print 'value' directly to show it changed
     // Expected output: "value is now: 99"
-	printf("value is now: %d\n", value);
+	std::cout << "value is now: " << value << '\n';
+	//printf("value is now: %d\n", value);
     // --- 4. Pointer arithmetic ---
     // ? SEE DIAGRAM: images/array_in_memory.png — shows pointer arithmetic on the array
     std::cout << "\n--- 4. Pointer Arithmetic ---" << '\n';
@@ -170,6 +171,11 @@ void pointersAndArrays() {
     //   This is cleaner, safer, and less error-prone — no pointer,
     //   no bounds to get wrong. But understanding the pointer version
     //   above is essential — it's what the range-based for does under the hood!
+
+    std::cout << "Walking with pointer: ";
+
+    // your loop here
+
 
     std::cout << '\n';
 }
