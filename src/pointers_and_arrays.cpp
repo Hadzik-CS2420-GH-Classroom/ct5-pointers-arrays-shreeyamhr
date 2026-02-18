@@ -174,6 +174,9 @@ void pointersAndArrays() {
     std::cout << "Walking with pointer: ";
 
     // your loop here
+    for (int* p = numbers; p < numbers + size; ++p) {
+        std::cout << *p << " ";
+    }
 
     std::cout << '\n';
 }
