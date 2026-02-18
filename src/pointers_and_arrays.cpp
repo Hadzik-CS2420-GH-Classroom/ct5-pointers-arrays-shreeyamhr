@@ -171,12 +171,5 @@ void pointersAndArrays() {
     //   no bounds to get wrong. But understanding the pointer version
     //   above is essential — it's what the range-based for does under the hood!
 
-    std::cout << "Walking with pointer: ";
-
-    // your loop here
-    for (int* p = numbers; p < numbers + size; ++p) {
-        std::cout << *p << " ";
-    }
-
     std::cout << '\n';
 }
